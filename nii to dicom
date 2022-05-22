@@ -1,0 +1,9 @@
+import SimpleITK as sitk
+
+image = sitk.ReadImage("01.dcm") # 读取一个含有头信息的dicom格式的医学图像
+keys = image.GetMetaDataKeys() # 获取它的头信息
+
+image2=sitk.ReadImage(*****.nii.gz)# 读取要转换格式的图像
+for key in keys:
+	image2.SetMetaData(key, image.GetMetaData(key))  # 把第一张图像的头信息，插入到第二张图像
+sitk.WriteImage(image2, '*****.dcm') # 把插入过头信息的图像输出为dicom格式
